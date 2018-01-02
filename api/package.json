@@ -1,0 +1,11 @@
+{
+  "name": "curso-mean-social",
+  "version": "1.0.0",
+  "description": "Backend to social network with Angular and Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pablo384",
+  "license": "MIT"
+}
