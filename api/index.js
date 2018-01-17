@@ -10,7 +10,7 @@ mongoose.connect('mongodb://localhost:27017/curso_mean_social', {useMongoClient:
 
         //crear servidor
         app.listen(port, () => {
-            console.log('servidor corriendo en http//localhost:38800');
+            console.log('servidor corriendo en localhost:3800');
         });
     })
     .catch(err => console.log(err));

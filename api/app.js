@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
         message: 'Hola Mundo desde el servidor'
     });
 });
-app.get('/pruebas', (req, res) => {
+app.post('/pruebas', (req, res) => {
     res.status(200).send({
         message: 'pruebas con nodejs'
     });
