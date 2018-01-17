@@ -1,6 +1,7 @@
 'use strict';
 const User = require('../models/user');
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('../services/jwt');
 
 //rutas
 function home(req, res) {
@@ -77,7 +78,18 @@ function loginUser(req, res) {
                 if(check){
                     // devolver datos de usuario
                     userLogged.password = undefined;
-                    return res.status(200).send({user: userLogged, message: 'Identificado correctamente'});
+                    if(params.getToken){
+                        // generar y devolver token
+                        return res.status(200).send({
+                            user: userLogged,
+                            token: jwt.createToken(userLogged),
+                            message: 'Identificado correctamente'
+                        });
+
+                    }else{
+                        return res.status(200).send({user: userLogged, message: 'Identificado correctamente'});
+                    }
+
                 }else{
                     return res.status(404).send({message: 'Contrasena incorrecta'});
                 }
