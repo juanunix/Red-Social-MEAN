@@ -76,6 +76,7 @@ function loginUser(req, res) {
                 if (err) return res.status(404).send({message: 'Error al comprobar credenciales'});
                 if(check){
                     // devolver datos de usuario
+                    userLogged.password = undefined;
                     return res.status(200).send({user: userLogged, message: 'Identificado correctamente'});
                 }else{
                     return res.status(404).send({message: 'Contrasena incorrecta'});
