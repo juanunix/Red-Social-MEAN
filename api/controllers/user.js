@@ -16,7 +16,7 @@ function pruebas(req, res) {
 }
 
 function saveUser(req, res) {
-    const params = req.body;
+    let params = req.body;
     let user = new User();
 
     if (params.name && params.surname &&
@@ -64,8 +64,33 @@ function saveUser(req, res) {
     }
 }
 
+function loginUser(req, res) {
+    let params = req.body;
+    const email = params.email.toLowerCase();
+    const password = params.password;
+
+    User.findOne({email: email}, (err, userLogged) =>{
+        if (err) return res.status(404).send({message: 'Error al iniciar Sesion'});
+        if(userLogged){
+            bcrypt.compare(password, userLogged.password, (err, check)=>{
+                if (err) return res.status(404).send({message: 'Error al comprobar credenciales'});
+                if(check){
+                    // devolver datos de usuario
+                    return res.status(200).send({user: userLogged, message: 'Identificado correctamente'});
+                }else{
+                    return res.status(404).send({message: 'Contrasena incorrecta'});
+                }
+            })
+        }else {
+            return res.status(404).send({message: 'El usuario no se pudo identificar!!'});
+        }
+
+    })
+}
+
 module.exports = {
     home,
     pruebas,
-    saveUser
+    saveUser,
+    loginUser
 };
