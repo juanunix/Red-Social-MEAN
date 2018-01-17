@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 //cargar rutas
-
+const user_routes = require('./routes/user');
 
 //midlewares
 app.use(bodyParser.urlencoded({extended: false}));
@@ -12,16 +12,7 @@ app.use(bodyParser.json());
 //cors
 
 //rutas
-app.get('/', (req, res) => {
-    res.status(200).send({
-        message: 'Hola Mundo desde el servidor'
-    });
-});
-app.post('/pruebas', (req, res) => {
-    res.status(200).send({
-        message: 'pruebas con nodejs'
-    });
-});
+app.use('/api', user_routes);
 
 //exportar
 module.exports = app;

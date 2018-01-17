@@ -16,9 +16,9 @@
     "express": "^4.16.2",
     "jwt-simple": "^0.5.1",
     "moment": "^2.20.1",
-    "mongoose": "^5.0.0-rc1"
+    "mongoose": "^5.0.0-rc2"
   },
   "devDependencies": {
-    "nodemon": "^1.14.7"
+    "nodemon": "^1.14.11"
   }
 }

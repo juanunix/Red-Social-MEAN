@@ -4,7 +4,7 @@ const app = require('./app');
 const port = 3800;
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/curso_mean_social', {useMongoClient: true})
+mongoose.connect('mongodb://localhost:27017/curso_mean_social')
     .then(() => {
         console.log('Conexion correcta con MongoDB');
 
