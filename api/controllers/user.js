@@ -132,12 +132,31 @@ function getUsers(req, res) {
         });
     });
 }
+// edicion de datos de usuario
+function updateUser(req, res) {
+    var userId = req.params.id;
+    var update = req.body;
+    //borrar propiedad password
+    delete update.password;
 
+    if (userId !== req.user.sub){
+        res.status(500).send({message: 'No tienes permiso para actualizar los datos del usuario'});
+    }
+    User.findByIdAndUpdate(userId, update, {new:true} , (err, userUpdated) =>{
+        // console.log(err);
+        // console.log(userUpdated);
+        if (err) return res.status(500).send({message: 'Error en la peticion'});
+        if (!userUpdated) return res.status(404).send({message: 'No se ha podid actualizar el usuario'});
+        userUpdated.password = undefined;
+        return res.status(200).send({userUpdated});
+    });
+}
 module.exports = {
     home,
     pruebas,
     saveUser,
     loginUser,
     getUser,
-    getUsers
+    getUsers,
+    updateUser
 };
